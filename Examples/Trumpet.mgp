@@ -1,0 +1,10 @@
+<AKPMGP>
+<rv>10.7</rv>
+<set>
+drawmode=3D
+acc3d=5
+cordetail=0
+</set>
+<eq>
+x=2*cos(u)*sin(v),y=2*((cos(v)+log(tan(1/2*v)))+2),z=2*sin(u)*sin(v) ;9;[0,6.3][0.03,2];{};sc:#FF8080FF;2;1;1
+</eq>

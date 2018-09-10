@@ -1,0 +1,13 @@
+<AKPMGP>
+<rv>10.5</rv>
+<set>
+drawmode=3D
+acc3d=15
+</set>
+<eq>
+r=5*Sin(a*t)*Cos(b*p);4;[-inf,+inf];{};sc:#FF80FF00;2;1;1
+</eq>
+<var>
+a=5;[0,10];1;1;0;0
+b=3;[0,10];1;1;0;0
+</var>

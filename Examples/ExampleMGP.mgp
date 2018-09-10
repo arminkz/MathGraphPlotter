@@ -1,0 +1,34 @@
+<AKPMGP>
+<rv>10.4</rv>
+<set>
+mode=2D
+acc=100
+</set>
+<eq>
+y=Sin(x);1;[-inf,+inf];{};Red;2;1
+y=Cos(x);1;[-inf,+inf];{};Red;2;1
+</eq>
+<!-- Out=Function ; Type ; [DS,DE] ; {Dexcept} ; Brush ; Thickness ; Opacity ; Visibility(Bool) -->
+<!-- Known Issue : Domain Except Doesnt Work For Now ! -->
+<!-- Bool 0:False 1:True -->
+<var>
+a=0;[-10,10];1;500;1;1
+</var>
+<!-- Name=Value ; [Min,Max] ; By ; Duration ; RepeatMode ; Autoplay(Bool) -->
+<!-- RepeatMode : 0:AutoReverse   1:Reapeater   -->
+<point>
+a(0,1,2);Red;1;0
+b(2,0,2);Blue;1;0
+</point>
+<!-- Name(X,Y,Z) ; Color ; Visibility(Bool) ; IsLight(Bool) -->
+<!-- Bool 0:False 1:True -->
+<vect>
+v(1,1,1);;Red;1
+</vect>
+<!-- Name(X,Y,Z) ; OriginPointName ; Color ; Visibility(Bool)-->
+<!-- OriginPoint Can Be Null -->
+<shape>
+ShapeName(Type);(Origin);(Dir);L;W;H;RX;RY;RZ;FC;CF;BC;TC;TD;PD;Brush;Visiblity
+</shape>
+<!-- ShapeType(OriginPoint) ; (Direction) ; Length ; Width ; Height ; RadiusX ; RadiusY
+RadiusZ ; FaceCount ; CubeFace ; BaseCap ; TopCap ; ThetaDiv ; PhiDiv ; Brush ; Visibility(Bool) -->

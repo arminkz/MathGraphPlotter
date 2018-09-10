@@ -1,0 +1,12 @@
+<AKPMGP>
+<rv>10.7</rv>
+<set>
+drawmode=3D
+acc3d=5
+</set>
+<eq>
+z=(x*y)/15;3;[-inf,+inf];{};sc:#FFFFFF00;2;1;1
+z=(x^2+y^2-5)/25;3;[-inf,+inf];{};sc:#FF0000FF;2;1;1
+z=0;3;[-inf,+inf];{};sc:#FFFF00FF;2;1;1
+z=(x/5)^2 - (y/5)^2;3;[-inf,+inf];{};sc:#FF00FF00;2;1;1
+</eq>

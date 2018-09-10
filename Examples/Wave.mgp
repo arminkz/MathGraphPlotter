@@ -1,0 +1,9 @@
+<AKPMGP>
+<rv>10.5</rv>
+<set>
+drawmode=3D
+acc3d=15
+</set>
+<eq>
+y=Sin(x^2+z^2);1;[-inf,+inf];{};sc:#FF80FFFF;2;1;1
+</eq>

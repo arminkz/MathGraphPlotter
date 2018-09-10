@@ -1,0 +1,10 @@
+<AKPMGP>
+<rv>10.5</rv>
+<set>
+drawmode=3D
+acc3d=5
+</set>
+<eq>
+z=Sqr(x^2+y^2);3;[-inf,+inf];{};sc:#FF00FF00;2;1;1
+z=-Sqr(x^2+y^2);3;[-inf,+inf];{};sc:#FF00FF00;2;1;1
+</eq>

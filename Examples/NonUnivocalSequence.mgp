@@ -1,0 +1,10 @@
+<AKPMGP>
+<rv>10.7</rv>
+<set>
+drawmode=2D
+acc=50
+</set>
+<eq>
+y=n*Sin(n);5;[-inf,+inf];{};sc:#FFFF0000;2;1;1
+y=x*Sin(x);2;[0,+inf];{};sc:#FF008000;2;1;0
+</eq>

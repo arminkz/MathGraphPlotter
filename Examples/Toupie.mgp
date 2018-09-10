@@ -1,0 +1,10 @@
+<AKPMGP>
+<rv>10.7</rv>
+<set>
+drawmode=3D
+acc3d=5
+cordetail=0
+</set>
+<eq>
+x=4*(abs(u)-1)^2 * cos(v),y=4*u,z=4*(abs(u)-1)^2 * sin(v);9;[-1,1][0,6.3];{};sc:#FF808000;2;1;1
+</eq>

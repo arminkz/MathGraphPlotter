@@ -1,0 +1,16 @@
+<AKPMGP>
+<rv>10.5</rv>
+<set>
+drawmode=3D
+coloringmode=bycor
+cordetail=0
+acc3d=5
+</set>
+<eq>
+y=5;1;[-inf,+inf];{};sc:Black;2;1;1
+y=-5;1;[-inf,+inf];{};sc:Black;2;1;1
+x=5;2;[-inf,+inf];{};sc:Black;2;1;1
+x=-5;2;[-inf,+inf];{};sc:Black;2;1;1
+z=5;3;[-inf,+inf];{};sc:Black;2;1;1
+z=-5;3;[-inf,+inf];{};sc:Black;2;1;1
+</eq>

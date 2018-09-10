@@ -1,0 +1,9 @@
+<AKPMGP>
+<rv>10.5</rv>
+<set>
+drawmode=2D
+acc=50
+</set>
+<eq>
+y=e^-(x^2);1;[-inf,+inf];{};sc:#FF00FF00;2;1;1
+</eq>

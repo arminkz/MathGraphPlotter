@@ -1,0 +1,15 @@
+﻿<AKPMGP>
+<rv>10.5</rv>
+<set>
+cordetail=0
+corbackground=res:Space.jpg
+drawmode=3D
+acc3d=15
+</set>
+<var>
+t=0;[0,30];0.1;0;1;1
+</var>
+<shape>
+کره ی زمین(7);();();;;;1;;;3;63;1;1;40;20;res:Earth1K.jpg;1
+کره ی ماه(7);(5*Cos(t*0.209),5*Sin(t*0.209),0);();;;;0.27;;;3;63;1;1;40;20;res:Moon1K.jpg;1
+</shape>

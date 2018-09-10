@@ -1,0 +1,745 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:AKP_Math_Graph_Plotter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    x:Class="MainWindow" 
+    Title="AKP Math Graph Plotter" x:Name="WinMain" WindowStartupLocation="CenterScreen" WindowState="Maximized"
+    Loaded="Window_Load" Closed="Window_Closed" KeyDown="App_KeyDown"
+    d:DesignWidth="1104" d:DesignHeight="638" Icon="MGPIcon.ico" >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/ListStyle.xaml"/>
+                <ResourceDictionary Source="Styles/ButtonStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <local:Toggle3D x:Key="Toggle3DConverter" />
+            <local:VisibilityBoolConverter x:Key="VisibilityBoolConverter"/>
+            <local:EnumBoolConverter x:Key="EnumBoolConverter" />
+            <local:BorderClipConverter x:Key="BorderClipConverter"/>
+
+            <LinearGradientBrush x:Key="SpacerBrush" EndPoint="0,0.5" StartPoint="1,0.5" >
+                <GradientStop Color="Transparent" Offset="0" />
+                <GradientStop Color="#FFBBBBBB" Offset="0.25"/>
+                <GradientStop Color="#FFBBBBBB" Offset="0.75"/>
+                <GradientStop Color="Transparent" Offset="1"/>
+            </LinearGradientBrush>
+
+            <Style x:Key="FarsiMenu" TargetType="{x:Type ContextMenu}">
+                <Setter Property="FontFamily" Value="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Mitra" />
+                <Setter Property="FontSize" Value="18"/>
+            </Style>
+
+            <Style x:Key="FarsiTextBlock" TargetType="{x:Type TextBlock}">
+                <Setter Property="FlowDirection" Value="RightToLeft" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontFamily" Value="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Mitra" />
+            </Style>
+
+            <Style x:Key="FarsiSmallTextBlock" TargetType="{x:Type TextBlock}">
+                <Setter Property="FlowDirection" Value="RightToLeft" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontFamily" Value="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Mitra" />
+            </Style>
+
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <!-- Command Bindings -->
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static local:MainWindow.AddCommand}"
+                        Executed="AddEX"
+                        CanExecute="AddCE" />
+        <CommandBinding Command="{x:Static local:MainWindow.DrawCommand}"
+                        Executed="DrawEX"
+                        CanExecute="DrawCE" />
+        <CommandBinding Command="{x:Static local:MainWindow.RefreshCommand}"
+                        Executed="RefreshEX"
+                        CanExecute="RefreshCE" />
+        <CommandBinding Command="{x:Static local:MainWindow.CopyCommand}"
+                        Executed="CopyEX"
+                        CanExecute="CopyCE" />
+        <CommandBinding Command="{x:Static local:MainWindow.ChangeVisibilityCommand}"
+                        Executed="ChangeVisibilityEX"
+                        CanExecute="ChangeVisibilityCE" />
+        <CommandBinding Command="{x:Static local:MainWindow.DeleteCommand}"
+                        Executed="DeleteEX"
+                        CanExecute="DeleteCE" />
+        <CommandBinding Command="{x:Static local:MainWindow.OpenOptionCommand}"
+                        Executed="OpenOptionEX"
+                        CanExecute="OpenOptionCE" />
+        <CommandBinding Command="{x:Static local:MainWindow.SetSolidColorBrushCommand}"
+                        Executed="SetSolidColorBrushEX"
+                        CanExecute="SetSolidColorBrushCE" />
+        <CommandBinding Command="{x:Static local:MainWindow.SetImageBrushCommand}"
+                        Executed="SetImageBrushEX"
+                        CanExecute="SetImageBrushCE" />
+        <CommandBinding Command="{x:Static local:MainWindow.PlayVarCommand}"
+                        Executed="PlayVarEX"
+                        CanExecute="PlayVarCE" />
+        <CommandBinding Command="{x:Static local:MainWindow.PauseVarCommand}"
+                        Executed="PauseVarEX"
+                        CanExecute="PauseVarCE" />
+        <CommandBinding Command="{x:Static local:MainWindow.EqExpChangedCommand}"
+                        Executed="EqExpChangedEX"
+                        CanExecute="EqExpChangedCE" />
+    </Window.CommandBindings>
+    
+    <!-- Triggers -->
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded" >
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Duration="00:00:01" Storyboard.TargetProperty="Opacity" From="0" To="1" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFDADADA" Offset="1"/>
+            <GradientStop Color="White" Offset="0.4"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Grid>
+        <!-- Main Grid -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <Menu Grid.Row="0" Grid.ColumnSpan="3" MinHeight="25" Background="#7FF3F3F3" 
+              FontFamily="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Koodak" FontSize="12" >
+            <MenuItem Header="فایل" Margin="4,2" Padding="2">
+                <MenuItem Header="بارگذاری پرونده ..." Click="OpenFile"/>
+                <MenuItem Header="بارگذاری از ریسورس ..." Click="OpenFromResource" />
+                <Separator/>
+                <MenuItem Header="ذخیره پرونده ..." Click="SaveFile" />
+                <Separator/>
+                <MenuItem Header="خروج" Click="Window_Closed" />
+            </MenuItem>
+            <MenuItem Header="ابزار ها" Margin="4,2" Padding="2">
+                <!--<MenuItem Header="Setting ..." />-->
+                <MenuItem Header="ترمینال ..." Click="OpenTerminal"  />
+                <!--<MenuItem Header="Debug Command ..." Click="DebugCommand"  />-->
+            </MenuItem>
+            <MenuItem Header="کمک" Margin="4,2" Padding="2">
+                <MenuItem Header="درباره نرم افزار" Click="OpenAbout" />
+            </MenuItem>
+            <MenuItem Margin="4,2" Padding="2" IsEnabled="False">
+                <MenuItem.Header>
+                    <TextBlock Foreground="#FF9C9C9C" FlowDirection="RightToLeft" >
+                        <Run Text="نسخه"/>
+                        <Run Text="{Binding Source={x:Static local:AppInfo.Version}, Mode=OneWay}"/>
+                    </TextBlock>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Name="TestPos" IsEnabled="False" Margin="2" Padding="2" />
+        </Menu>
+
+        <Border Grid.Row="1" Grid.Column="0" CornerRadius="3" BorderThickness="1" BorderBrush="#FFA49B9B"
+                Margin="20,10,10,10" Background="White" Padding="0" >
+            <Grid x:Name="GrdCor" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition x:Name="ColCor" Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" MinWidth="40">
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="0,0.5" StartPoint="1,0.5">
+                            <GradientStop Color="White" Offset="0"/>
+                            <GradientStop Color="#FFF0F0F0" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+
+                        <StackPanel Grid.Row="0">
+                        
+                        <Border BorderThickness="0,0,0,1" BorderBrush="{StaticResource SpacerBrush}" Padding="0,5,0,5">
+                            <StackPanel>
+                                <Button Style="{StaticResource PlusButton}" Margin="5,4,5,5" Click="ZoomIn" />
+                                <Button Style="{StaticResource HomeButton}" Margin="5,6,5,5" Click="ZoomHome" />
+                                <Button Style="{StaticResource MinusButton}" Margin="5,2,5,5" Click="ZoomOut" />
+                                
+                                <Button Style="{StaticResource ZoomModeButton}" Margin="5,6,5,5" Click="SwitchZM"
+                                Visibility="{Binding DrawMode,ElementName=WinMain,Converter={StaticResource Toggle3DConverter},ConverterParameter=ThreeD}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border BorderThickness="0,0,0,0" BorderBrush="{StaticResource SpacerBrush}" Padding="0,5,0,5" MinHeight="46">
+                            <StackPanel>
+
+                                <Button Margin="5" Style="{StaticResource ThreeTwoDButton}" Click="SwitchDM" />             
+                                
+                                <Button Margin="5" Style="{StaticResource SettingsButton}" Click="ShowDrawSetting"/>
+                                
+                            </StackPanel>
+                        </Border>
+
+                        <Border BorderThickness="0,1,0,0" BorderBrush="{StaticResource SpacerBrush}" Padding="0,5,0,5" MinHeight="46"
+                                Visibility="{Binding DrawMode,ElementName=WinMain,
+                                Converter={StaticResource Toggle3DConverter},ConverterParameter=ThreeFourD}">
+                            
+                            <StackPanel>
+                                <Button Margin="5" Style="{StaticResource ModelTypeButton}" Click="SwitchAPM"/>
+
+                                <Button Margin="5" Style="{StaticResource LabelTypeButton}" Click="SwitchLT"/>
+                            </StackPanel>
+
+                        </Border>
+                            
+
+
+                        <Border BorderThickness="0,0,0,0" BorderBrush="{StaticResource SpacerBrush}" Padding="0,5,0,5" Visibility="Collapsed">
+                            <StackPanel>
+                                <Button Margin="5,7,5,5" Style="{StaticResource SaveButton}" />
+                            </StackPanel>
+                        </Border>
+                        
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" >
+                        <!-- Notifications Come Here (Not Working In Beta) -->
+                    </StackPanel>
+                </Grid>
+
+                <Border Grid.Column="1" BorderThickness="1,0,0,0" BorderBrush="#FFA49B9B"
+                        Background="{Binding CorBackground,ElementName=WinMain}" Padding="0" >
+                    
+                    <Grid Name="CorMain" Background="Transparent" SizeChanged="Draw2D"
+                          MouseDown="Cor_MouseDown" MouseUp="Cor_MouseUp" MouseMove="Cor_MouseMove" MouseWheel="Cor_MouseWheel">
+                    <!-- Main Drawing Part -->
+
+                    <Canvas x:Name="Cor2D_Behind" Background="Transparent" ClipToBounds="True"
+                		    Panel.ZIndex="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                            Visibility="{Binding DrawMode,ElementName=WinMain,Converter={StaticResource Toggle3DConverter},ConverterParameter=TwoD}" />
+
+                    <Canvas x:Name="Cor2D_Front" Background="Transparent" Width="{Binding ActualWidth, ElementName=Cor2D_Behind}" Height="{Binding ActualHeight, ElementName=Cor2D_Behind}"  ClipToBounds="True"
+                		    Panel.ZIndex="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                            Visibility="{Binding DrawMode,ElementName=WinMain,Converter={StaticResource Toggle3DConverter},ConverterParameter=TwoD}"/>
+                    
+                    <Viewport3D x:Name="Cor3D" IsHitTestVisible="False" Panel.ZIndex="0"
+                                Visibility="{Binding DrawMode,ElementName=WinMain,Converter={StaticResource Toggle3DConverter},ConverterParameter=ThreeD}">
+                        <Viewport3D.Camera>
+                            <!--Camera-->
+                            <PerspectiveCamera x:Name="Camera3D" UpDirection="0 1 0" FieldOfView="40"
+                                               Position="0 0 30" LookDirection="0 0 -1" />
+                        </Viewport3D.Camera>
+                            <ModelVisual3D x:Name="VisualLight">
+                                <!--Lights-->
+                                <ModelVisual3D.Content>
+                                    <Model3DGroup x:Name="GroupLight">
+
+                                    </Model3DGroup>
+                                </ModelVisual3D.Content>
+                            </ModelVisual3D>
+                            <ModelVisual3D Transform="{Binding Transform3D, ElementName=WinMain}" >
+                                <ModelVisual3D.Content>
+                                    <Model3DGroup x:Name="VisualModel">
+                                        <!--3D Model-->
+                                        <!--!IMPORTANT-->
+                                    </Model3DGroup>
+                                </ModelVisual3D.Content>
+                            </ModelVisual3D>
+                            <ModelVisual3D x:Name="VisualWire" Transform="{Binding Transform3D, ElementName=WinMain}">
+                                <!--3D Wireframe-->
+                            </ModelVisual3D>
+                            <ModelVisual3D x:Name="VisualCorLines" Transform="{Binding Transform3D, ElementName=WinMain}">
+                                <!--Space Lines X Y Z-->
+                            </ModelVisual3D>
+                            <ModelVisual3D x:Name="VisualCorCube" Transform="{Binding Transform3D, ElementName=WinMain}">
+                                <!--3D Space Cube-->
+                            </ModelVisual3D>
+                        
+                            <ModelVisual3D x:Name="VisualDebug" Transform="{Binding Transform3D, ElementName=WinMain}">
+                                <!-- This Part Handles 3D Debugging -->
+                            </ModelVisual3D>
+                        </Viewport3D>
+
+                        <Canvas x:Name="Cor3D_Overlay" Background="Transparent" Width="{Binding ActualWidth, ElementName=Cor3D}" Height="{Binding ActualHeight, ElementName=Cor3D}"  ClipToBounds="True"
+                		    Panel.ZIndex="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                            Visibility="{Binding DrawMode,ElementName=WinMain,Converter={StaticResource Toggle3DConverter},ConverterParameter=ThreeD}" Margin="10,0,-10,0">
+                        </Canvas>
+
+                        <Viewport3D x:Name="Cor4D" IsHitTestVisible="False" Panel.ZIndex="0"
+                                Visibility="{Binding DrawMode,ElementName=WinMain,Converter={StaticResource Toggle3DConverter},ConverterParameter=FourD}">
+                            <Viewport3D.Camera>
+                                <!--Camera-->
+                                <OrthographicCamera x:Name="Camera4D" UpDirection="0 1 0" Width="10"
+                                               Position="0 0 6" LookDirection="0 0 -1" />
+                            </Viewport3D.Camera>
+                            <ModelVisual3D x:Name="VisualLight__4D">
+                                <!--Lights-->
+                                
+                                <ModelVisual3D.Content>
+                                    <Model3DGroup x:Name="GroupLight__4D">
+                                        <DirectionalLight Direction="0,0,-1"/>
+                                    </Model3DGroup>
+                                </ModelVisual3D.Content>
+                            </ModelVisual3D>
+                            <ModelVisual3D Transform="{Binding Transform3D, ElementName=WinMain}" >
+                                <ModelVisual3D.Content>
+                                    <Model3DGroup x:Name="VisualModel4D">
+                                        <!--4D Model-->
+                                        <!--!IMPORTANT-->
+                                        <!--TESTING 4D-->
+                                        <!--<GeometryModel3D>
+                                            <GeometryModel3D.Geometry>
+                                                <MeshGeometry3D 
+                                                    Positions="-5 -2 0  5 -2 0  -5 2 0  5 2 0"
+                                                    Normals="0 0 1  0 0 1  0 0 1  0 0 1"
+                                                    TextureCoordinates="0 1  1 1  0 0  1 0   "
+                                                    TriangleIndices="0 1 2  1 3 2" />
+                                            </GeometryModel3D.Geometry>
+                                            <GeometryModel3D.Material>
+                                                <DiffuseMaterial>
+                                                    <DiffuseMaterial.Brush>
+                                                        <VisualBrush>
+                                                            <VisualBrush.Visual>
+                                                                <TextBlock Text="Testing 4D Mode ..." FontSize="22"/>
+                                                            </VisualBrush.Visual>
+                                                        </VisualBrush>
+                                                    </DiffuseMaterial.Brush>
+                                                </DiffuseMaterial>
+                                            </GeometryModel3D.Material>
+                                        </GeometryModel3D>-->
+                                    </Model3DGroup>
+                                </ModelVisual3D.Content>
+                            </ModelVisual3D>
+                            <ModelVisual3D x:Name="VisualWire4D" Transform="{Binding Transform3D, ElementName=WinMain}">
+                                <!--3D Wireframe-->
+                            </ModelVisual3D>
+                            <ModelVisual3D x:Name="VisualCorLines4D" Transform="{Binding Transform3D, ElementName=WinMain}">
+                                <!--Space Lines X Y Z-->
+                            </ModelVisual3D>
+                            <ModelVisual3D x:Name="VisualCorCube__4D" Transform="{Binding Transform3D, ElementName=WinMain}">
+                                <!--3D Space Cube-->
+                            </ModelVisual3D>
+
+                            <ModelVisual3D x:Name="VisualDebug__4D" Transform="{Binding Transform3D, ElementName=WinMain}">
+                                <!-- This Part Handles 3D Debugging -->
+                            </ModelVisual3D>
+                        </Viewport3D>
+
+                        <TextBlock Name="CorInfo" Text="" Panel.ZIndex="99" Margin="10" HorizontalAlignment="Right" />
+                        
+                        <StackPanel>
+                            <StackPanel Margin="10" 
+                                Visibility="{Binding DrawMode,ElementName=WinMain,Converter={StaticResource Toggle3DConverter},ConverterParameter=FourD}">
+                                <CheckBox Content="Tesseract (4D Cube)" Margin="0,4,0,8"
+                                          IsChecked="{Binding DrawTesseract, ElementName=WinMain}"/>
+                                <StackPanel Orientation="Horizontal" >
+                                    <CheckBox Content="4D Rotation" Margin="0,4,0,0"
+                                              IsChecked="{Binding Rotate4D, ElementName=WinMain}"/>
+                                    <Button Content="Reset" Click="ResetCamera4D" Margin="10,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Margin="10,10,0,0" Visibility="{Binding Rotate4D, ElementName=WinMain,Converter={StaticResource VisibilityBoolConverter}}">
+                                    <RadioButton Name="R4D_XY" Content="XY"/>
+                                    <RadioButton Name="R4D_YZ" Content="YZ"/>
+                                    <RadioButton Name="R4D_XZ" Content="XZ"/>
+                                    <RadioButton Name="R4D_XW" Content="XW" IsChecked="True"/>
+                                    <RadioButton Name="R4D_YW" Content="YW"/>
+                                    <RadioButton Name="R4D_ZW" Content="ZW"/>
+                                </StackPanel>
+                            </StackPanel>
+                            
+                        </StackPanel>
+                        
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" Grid.Column="1" CornerRadius="3" BorderThickness="1" BorderBrush="#FFA49B9B"
+                Margin="10,10,20,10" Background="white">
+            <Grid>          
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Border BorderThickness="0,0,0,1" BorderBrush="#FFA49B9B">
+                    <Grid>
+                        <Grid.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                    <WrapPanel MinHeight="50">
+                        <Button  Margin="5,5,0,5" Background="Transparent" BorderBrush="Transparent" Click="OpenDropDown">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Images/AddEq.png" Width="28" Height="28" Margin="5,5,0,5"/>
+                                <Path Margin="5" VerticalAlignment="Center" Stretch="Uniform" Fill="#505052"
+                                  Data="F1 M 301.14,-189.041L 311.57,-189.041L 306.355,-182.942L 301.14,-189.041 Z "/>
+                                </StackPanel>
+                                <Button.ContextMenu>
+                                    <ContextMenu FlowDirection="RightToLeft" Style="{StaticResource FarsiMenu}" >
+                                        <MenuItem Header="تابع" Margin="2" Padding="3" Click="AddEmptyFunction" >
+                                            <MenuItem.Icon>
+                                                <Image Source="/AKP Math Graph Plotter;component/Images/Function.png"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem Header="متغییر" Margin="2" Padding="3" Click="AddEmptyVariable" >
+
+                                        </MenuItem>
+                                        <MenuItem Header="نقطه" Margin="2" Padding="3" Click="AddEmptyPoint" >
+                                            <MenuItem.Icon>
+                                                <Image Source="/AKP Math Graph Plotter;component/Images/PointObj.png"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem Header="بردار" Margin="2" Padding="3" Click="AddEmptyVector">
+                                            <MenuItem.Icon>
+                                                <Image Source="/AKP Math Graph Plotter;component/Images/VectorObj.png"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <Separator/>
+                                        <MenuItem Header="شکل" Margin="2" Padding="3">
+                                            <MenuItem Header="مخروط" Margin="2" Padding="3" Click="AddEmptyCone">
+                                                <MenuItem.Icon>
+                                                    <Image Source="/AKP Math Graph Plotter;component/Images/Cone.png"/>
+                                                </MenuItem.Icon>
+                                            </MenuItem>
+                                            <MenuItem Header="مخروط ناقص" Margin="2" Padding="3" Click="AddEmptyTCone">
+                                                <MenuItem.Icon>
+                                                    <Image Source="/AKP Math Graph Plotter;component/Images/Cone.png"/>
+                                                </MenuItem.Icon>
+                                            </MenuItem>
+                                            <MenuItem Header="استوانه" Margin="2" Padding="3" Click="AddEmptyCylinder">
+                                                <MenuItem.Icon>
+                                                    <Image Source="/AKP Math Graph Plotter;component/Images/Cylinder.png"/>
+                                                </MenuItem.Icon>
+                                            </MenuItem>
+                                            <MenuItem Header="هرم" Margin="2" Padding="3" Click="AddEmptyPyramid">
+                                                <MenuItem.Icon>
+                                                    <Image Source="/AKP Math Graph Plotter;component/Images/Pyramid.png"/>
+                                                </MenuItem.Icon>
+                                            </MenuItem>
+                                            <MenuItem Header="مکعب" Margin="2" Padding="3" Click="AddEmptyCube">
+                                                <MenuItem.Icon>
+                                                    <Image Source="/AKP Math Graph Plotter;component/Images/Cube.png"/>
+                                                </MenuItem.Icon>
+                                            </MenuItem>
+                                            <MenuItem Header="مکعب مستطیل" Margin="2" Padding="3" Click="AddEmptyBox">
+                                                <MenuItem.Icon>
+                                                    <Image Source="/AKP Math Graph Plotter;component/Images/Cube.png"/>
+                                                </MenuItem.Icon>
+                                            </MenuItem>
+                                            <MenuItem Header="کره" Margin="2" Padding="3" Click="AddEmptySphere">
+                                                <MenuItem.Icon>
+                                                    <Image Source="/AKP Math Graph Plotter;component/Images/Sphere.png"/>
+                                                </MenuItem.Icon>
+                                            </MenuItem>
+                                            <MenuItem Header="کره ی بیضوی" Margin="2" Padding="3" Click="AddEmptyEllipsoid">
+                                                <MenuItem.Icon>
+                                                    <Image Source="/AKP Math Graph Plotter;component/Images/Sphere.png"/>
+                                                </MenuItem.Icon>
+                                            </MenuItem>
+                                        </MenuItem>
+                                    </ContextMenu>
+                                </Button.ContextMenu>
+                            </Button>
+                        </WrapPanel>
+
+                        <WrapPanel Grid.Column="1" FlowDirection="RightToLeft" MinHeight="50">
+                            <Button Height="40" Width="53" Margin="5,5,0,5" Background="{x:Null}" BorderBrush="{x:Null}"
+                                    Content="نمونه ها" Click="OpenExamples" 
+                                    FontFamily="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Koodak" FontSize="15" />
+                                
+                        </WrapPanel>
+                    </Grid>
+                </Border>
+
+                <ListBox x:Name="Eq_ListBox" Grid.Row="1" Style="{StaticResource ListBoxStyle}"
+                         ItemsSource="{Binding MathObjList,ElementName=WinMain}"/>
+
+            </Grid>
+
+
+        </Border>
+
+        <WrapPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Left" >
+            <Button Height="50" Width="50" Margin="20,0,5,10" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                    Click="OpenHelp">
+                <StackPanel>
+                    <Image Source="Images/Help.png" Width="32" Height="32"/>
+                </StackPanel>
+            </Button>
+            <Button Height="50" Width="50" Margin="5,0,5,10" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                    Click="OpenAbout">
+                <StackPanel>
+                    <Image Source="Images/About.png" Width="32" Height="32"/>
+                </StackPanel>
+            </Button>
+            <!--<Button Height="50" Width="50" Margin="35,0,5,10" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+                <StackPanel>
+                    <Image Source="Images/AppSetting.png" Width="32" Height="32"/>
+                </StackPanel>
+            </Button>-->
+            
+        </WrapPanel>
+
+        <WrapPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right" FlowDirection="RightToLeft" >
+            <Border BorderBrush="Black" BorderThickness="1" Margin="20,0,5,10">
+                <Canvas x:Name="DevCan" Width="250" Height="49" 
+                        Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                        ClipToBounds="True">
+                    <TextBlock x:Name="Dev0" FontFamily="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Koodak" FontSize="30"/>
+                </Canvas>
+            </Border>
+        </WrapPanel>
+        
+        <!-- Popups -->
+        <Popup x:Name="DrawSettingPopup" Placement="Center" PopupAnimation="Scroll" AllowsTransparency="True"
+               PlacementTarget="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" >
+            <!-- Draggable Popup -->
+            <i:Interaction.Behaviors>
+                <local:MouseDragPopupBehavior/>
+            </i:Interaction.Behaviors>
+
+            <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" Height="300" Width="425" 
+                    Background="WhiteSmoke">
+                <!-- Clipper -->
+                <Border CornerRadius="10">
+                    <Border.Clip>
+                        <MultiBinding Converter="{StaticResource BorderClipConverter}">
+                            <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
+                            <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}"/>
+                            <Binding Path="CornerRadius" RelativeSource="{RelativeSource Self}"/>
+                        </MultiBinding>
+                    </Border.Clip>
+                    
+                    <Grid>
+                        <!-- Popup Close Button -->
+                        <Button Style="{StaticResource CloseButton}" HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Click="ShowDrawSetting" Margin="7,7,0,0" Panel.ZIndex="1" />
+
+                        <TabControl FlowDirection="RightToLeft" Panel.ZIndex="0" Margin="0,-3,-3,0" >
+                            <TabItem>
+                                <TabItem.Header>
+                                    <TextBlock Text="تنظیمات رسم" Style="{StaticResource FarsiTextBlock}" Margin="2,3,0,0"/>
+                                </TabItem.Header>
+
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="0.5*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" 
+                                               Text="دقت رسم دو بعدی" Style="{StaticResource FarsiTextBlock}" 
+                                               Margin="20,10,0,0"/>
+
+                                    <Slider Grid.Row="0" Grid.Column="1" Width="150" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                            Minimum="20" Maximum="200" IsSnapToTickEnabled="True" 
+                                            Value="{Binding Acc,ElementName=WinMain,UpdateSourceTrigger=PropertyChanged}" ValueChanged="AutoRedrawCM"
+                                            Margin="0,10,0,0"/>
+
+                                    <TextBlock Grid.Row="0" Grid.Column="2"  VerticalAlignment="Center" HorizontalAlignment="Left"
+                                               Text="{Binding Acc,ElementName=WinMain,UpdateSourceTrigger=PropertyChanged}"
+                                               Margin="0,10,0,0"/>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"
+                                               Text="دقت رسم سه بعدی" Style="{StaticResource FarsiTextBlock}" 
+                                               Margin="20,10,0,0"/>
+
+                                    <Slider Grid.Row="1" Grid.Column="1" Width="150" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                            Minimum="3" Maximum="20" IsSnapToTickEnabled="True" 
+                                            Value="{Binding Acc3D,ElementName=WinMain,UpdateSourceTrigger=PropertyChanged}" ValueChanged="AutoRedrawCM" 
+                                            Margin="0,10,0,0"/>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="2"  VerticalAlignment="Center" HorizontalAlignment="Left"
+                                               Text="{Binding Acc3D,ElementName=WinMain,UpdateSourceTrigger=PropertyChanged}"
+                                               Margin="0,10,0,0"/>
+
+                                    <Separator Grid.Row="2" Grid.ColumnSpan="3" Margin="0,10,0,0" />
+
+                                    <TextBlock Grid.Row="3" Grid.Column="0"
+                                               Text="سیستم رنگ بندی سه بعدی"  Style="{StaticResource FarsiTextBlock}" 
+                                               Margin="20,10,0,0" />
+
+                                    <StackPanel Grid.Row="3" Grid.Column="1"
+                                                Margin="20,15,0,0">
+                                        <RadioButton Content="بر اساس قلمو"  FontFamily="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Koodak" 
+                                                     IsChecked="{Binding ColoringMethod,ElementName=WinMain,Converter={StaticResource EnumBoolConverter},ConverterParameter=Brush}"
+                                                     Checked="AutoRedrawCM"/>
+                                        <RadioButton Name="ColorByCor" Content="بر اساس مختصات" Margin="0,4,0,0" FontFamily="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Koodak" 
+                                                     IsChecked="{Binding ColoringMethod,ElementName=WinMain,Converter={StaticResource EnumBoolConverter},ConverterParameter=ByCor}"
+                                                     Checked="AutoRedrawCM"/>
+
+                                        <WrapPanel Orientation="Horizontal" 
+                                                   IsEnabled="{Binding IsChecked,ElementName=ColorByCor}"  
+                                                   Margin="2,7,2,2">
+                                            <CheckBox Content="X" Margin="5,2,2,2" Checked="AutoRedrawCM" Unchecked="AutoRedrawCM" FlowDirection="LeftToRight" 
+                                                      IsChecked="{Binding Path=ColorX,ElementName=WinMain,Mode=TwoWay}"/>
+                                            <CheckBox Content="Y" Margin="10,2,2,2" Checked="AutoRedrawCM" Unchecked="AutoRedrawCM" FlowDirection="LeftToRight"
+                                                      IsChecked="{Binding Path=ColorY,ElementName=WinMain,Mode=TwoWay}"/>
+                                            <CheckBox Content="Z" Margin="10,2,2,2" Checked="AutoRedrawCM" Unchecked="AutoRedrawCM" FlowDirection="LeftToRight"
+                                                      IsChecked="{Binding Path=ColorZ,ElementName=WinMain,Mode=TwoWay}"/>
+                                            <CheckBox Content="W" Margin="10,2,2,2" Checked="AutoRedrawCM" Unchecked="AutoRedrawCM" FlowDirection="LeftToRight" Visibility="Collapsed"
+                                                      IsChecked="{Binding Path=ColorW,ElementName=WinMain,Mode=TwoWay}"/>
+                                        </WrapPanel>
+                                    </StackPanel>
+
+                                </Grid>
+
+                            </TabItem>
+                            
+                            <TabItem>
+                                <TabItem.Header>
+                                    <TextBlock Text="دستگاه مختصات" Style="{StaticResource FarsiTextBlock}" Margin="0,3,0,0"/>
+                                </TabItem.Header>
+
+                                <Grid  Margin="0,10,0,0">  
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="0.5*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"
+                                               Text="جزئیات دستگاه مختصات" Style="{StaticResource FarsiTextBlock}"
+                                               Margin="20,10,0,0"/>
+
+                                    <Slider Grid.Row="0" Grid.Column="1" Width="150" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                            Minimum="0" Maximum="3" TickFrequency="1" IsSnapToTickEnabled="True"  
+                                            Value="{Binding CorDetail,ElementName=WinMain}"
+                                            Margin="0,10,0,0"/>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"
+                                               Text="پس زمینه دستگاه مختصات" Style="{StaticResource FarsiTextBlock}" 
+                                               Margin="20,10,0,0"/>
+                                    
+                                    <!-- CorBackground Changer -->
+                                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center"
+                                                Margin="20,10,0,0" >
+                                        <Button Click="SetCorSolidColorBrush" Padding="3" Margin="2.5" >
+                                            <Image Source="/AKP Math Graph Plotter;component/Images/ColorWheel.png" Width="28" Height="28" />
+                                            <Button.ToolTip>
+                                                <ToolTip>
+                                                    <TextBlock Text="انتخاب رنگ" Style="{StaticResource FarsiSmallTextBlock}"/>
+                                                </ToolTip>
+                                            </Button.ToolTip>
+                                        </Button>
+                                        <Button Click="SetCorImageBrush" Padding="3" Margin="2.5" >
+                                            <Image Source="/AKP Math Graph Plotter;component/Images/Image.png" Width="28" Height="28" />
+                                            <Button.ToolTip>
+                                                <ToolTip>
+                                                    <TextBlock Text="انتخاب تصویر" Style="{StaticResource FarsiSmallTextBlock}"/>
+                                                </ToolTip>
+                                            </Button.ToolTip>
+                                        </Button>
+                                    </StackPanel>
+                                    
+                                    <Separator Grid.Row="2" Grid.ColumnSpan="3" Margin="0,10,0,0"/>
+                                    
+                                    <TextBlock Grid.Row="3" Grid.Column="0"
+                                               Text="دستگاه مختصات 3 بعدی" Style="{StaticResource FarsiTextBlock}" 
+                                               Margin="20,15,0,0"/>
+
+                                    <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center"
+                                                Margin="20,15,0,0" >
+                                        <RadioButton FlowDirection="RightToLeft" IsThreeState="True" Content="گوشه ای" Margin="2,4,2,2" FontFamily="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Koodak" 
+                                                     IsChecked="{Binding Cor3DType,ElementName=WinMain,Converter={StaticResource EnumBoolConverter},ConverterParameter=Corneral}"
+                                                     Checked="DrawCoordinateSystem3D"/>
+                                        <RadioButton FlowDirection="RightToLeft" Content="مرکزی" Margin="8,4,2,2" FontFamily="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Koodak" 
+                                            IsChecked="{Binding Cor3DType,ElementName=WinMain,Converter={StaticResource EnumBoolConverter},ConverterParameter=Central}"
+                                            Checked="DrawCoordinateSystem3D"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center"
+                                                Margin="20,5,0,0" >
+                                        <RadioButton FlowDirection="RightToLeft" IsThreeState="True" Content="راستگرد" Margin="2,4,2,2" FontFamily="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Koodak" 
+                                                     Checked="DrawCoordinateSystem3D"/>
+                                        <RadioButton FlowDirection="RightToLeft" Content="چپگرد" Margin="8,4,2,2" FontFamily="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Koodak" 
+                                            IsChecked="{Binding Cor3DType,ElementName=WinMain,Converter={StaticResource EnumBoolConverter},ConverterParameter=Central}"
+                                            Checked="DrawCoordinateSystem3D"/>
+                                    </StackPanel>
+                                    
+                                    <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" 
+                                                Margin="20,10,0,0">
+                                        <CheckBox IsChecked="{Binding CameraLight,ElementName=WinMain}" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                  Checked="InitializeLight" Unchecked="InitializeLight" FlowDirection="LeftToRight"/>
+                                        <TextBlock Text="منبع نور روی دوربین" FontWeight="Normal" Margin="5,0,5,0"
+                                                   FontFamily="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Koodak" />
+                                    </StackPanel>
+
+                                </Grid>
+                            </TabItem>
+
+                            <TabItem>
+                                <TabItem.Header>
+                                    <TextBlock Text="تنظیمات پیشرفته" Style="{StaticResource FarsiTextBlock}" Margin="0,3,0,0"/>
+                                </TabItem.Header>
+                                
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Separator Grid.Row="1" Grid.ColumnSpan="3" Margin="0,10,0,0" />
+                                    <TextBlock Grid.Row="2" Grid.Column="2" Text="Application Version : 10.6" Margin="0,5" />
+                                    <TextBlock Grid.Row="2" Grid.Column="1" Text="Terminal Version : 0.9" Margin="0,5" />
+                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Setup Version : 0.3" Margin="10,5,0,5" />
+                                </Grid>
+                             
+                            </TabItem>
+                            
+                        </TabControl>
+                    </Grid>
+                </Border> <!-- End Of Clipper -->
+            </Border> 
+        </Popup>
+
+    </Grid>
+    
+</Window>

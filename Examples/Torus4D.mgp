@@ -1,0 +1,8 @@
+<AKPMGP>
+<rv>10.7</rv>
+<set>
+drawmode=4D
+</set>
+<eq>
+x=Sin(u),y=Cos(u),z=Sin(v),w=Cos(v);11;[-inf,+inf];{};sc:#FF0000FF;2;1;1
+</eq>

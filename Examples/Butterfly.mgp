@@ -1,0 +1,9 @@
+<AKPMGP>
+<rv>10.5</rv>
+<set>
+drawmode=2D
+acc=200
+</set>
+<eq>
+r=e^Cos(t)-2*Cos(4*t)+Sin((2*t-3.1415)/24)^5;4;[0,100];{};sc:#FFFF0080;2;1;1
+</eq>

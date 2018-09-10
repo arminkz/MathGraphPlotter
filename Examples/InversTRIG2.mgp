@@ -1,0 +1,9 @@
+<AKPMGP>
+<rv>10.5</rv>
+<set>
+drawmode=2D
+acc=50
+</set>
+<eq>
+y=atn(x);1;[-inf,+inf];{};sc:#FF8080FF;2;1;1
+</eq>

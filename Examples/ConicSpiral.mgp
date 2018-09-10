@@ -1,0 +1,9 @@
+<AKPMGP>
+<rv>10.5</rv>
+<set>
+drawmode=3D
+acc3d=5
+</set>
+<eq>
+x=u*Cos(u),y=u,z=u*Sin(u);8;[-inf,+inf];{};sc:#FFFF0000;2;1;1
+</eq>

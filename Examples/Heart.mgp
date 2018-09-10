@@ -1,0 +1,10 @@
+<AKPMGP>
+<rv>10.7</rv>
+<set>
+drawmode=3D
+acc3d=5
+cordetail=0
+</set>
+<eq>
+x=Cos(u)*(4*Sqr(1-v^2)*Sin(Abs(u))^Abs(u)),y=v,z=Sin(u)*(4*Sqr(1-v^2)*Sin(Abs(u))^Abs(u));9;[-pi,pi][0,2pi];{};sc:#FFFF0080;2;1;1
+</eq>

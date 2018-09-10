@@ -1,0 +1,485 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- _____________________________________________________ -->
+    <!-- Simple Buttons -->
+
+    
+    <!-- Plus Button -->
+    <Style x:Key="PlusImage" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/Plus.png"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/PlusMO.png"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="PlusButton" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <StackPanel>
+                        <Image Style="{StaticResource PlusImage}" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Focusable" Value="False" />
+    </Style>
+
+    <!-- Minus Button -->
+    <Style x:Key="MinusImage" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/Minus.png"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/MinusMO.png"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="MinusButton" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <StackPanel>
+                        <Image Style="{StaticResource MinusImage}"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Focusable" Value="False" />
+    </Style>
+
+    <!-- Home Button -->
+    <Style x:Key="HomeImage" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/Home.png"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="20" />
+        <Setter Property="Height" Value="20" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/HomeMO.png"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="HomeButton" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <StackPanel>
+                        <Image Style="{StaticResource HomeImage}" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Focusable" Value="False" />
+    </Style>
+
+    <!-- Close Button -->
+    <Style x:Key="CloseImage" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/Close.png"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="12" />
+        <Setter Property="Height" Value="12" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/CloseMO.png"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="CloseButton" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <StackPanel>
+                        <Image Style="{StaticResource CloseImage}" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Focusable" Value="False" />
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Visibility" Value="Hidden" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Settings Button -->
+    <Style x:Key="SettingsImage" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/Setting.png"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="20" />
+        <Setter Property="Height" Value="20" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/SettingMO.png"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="SettingsButton" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <StackPanel>
+                        <Image Style="{StaticResource SettingsImage}" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Focusable" Value="False" />
+    </Style>
+
+    <!-- Save Button -->
+    <Style x:Key="SaveImage" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/Save.png"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="18" />
+        <Setter Property="Height" Value="18" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/SaveMO.png"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="SaveButton" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <StackPanel>
+                        <Image Style="{StaticResource SaveImage}" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Focusable" Value="False" />
+    </Style>
+
+    
+    <!-- _____________________________________________________ -->
+    <!-- Complex Buttons -->
+    
+
+    <!--2D Image -->
+    <Style x:Key="TwoDImage" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/2D.png"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="24" />
+        <Setter Property="Height" Value="24" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/2DMO.png"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--3D Image -->
+    <Style x:Key="ThreeDImage" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/3D.png"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="25" />
+        <Setter Property="Height" Value="25" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/3DMO.png"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--4D Image -->
+    <Style x:Key="FourDImage" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/4D.png"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="25" />
+        <Setter Property="Height" Value="25" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/4DMO.png"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- 2D / 3D / 4D Switch Button -->
+    <Style x:Key="ThreeTwoDButton" TargetType="{x:Type Button}">
+        <Setter Property="Focusable" Value="False" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding DrawMode,ElementName=WinMain}" Value="2D">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <StackPanel>
+                                <Image Style="{StaticResource TwoDImage}" />
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding DrawMode,ElementName=WinMain}" Value="3D">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <StackPanel>
+                                <Image Style="{StaticResource ThreeDImage}" />
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding DrawMode,ElementName=WinMain}" Value="4D">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <StackPanel>
+                                <Image Style="{StaticResource FourDImage}" />
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    
+    
+    
+    <!-- ZoomByValue Image -->
+    <Style x:Key="ZoomImage" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/Zoom.png"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="20" />
+        <Setter Property="Height" Value="20" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/ZoomMO.png"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Camera Image -->
+    <Style x:Key="CameraImage" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/Camera.png"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="20" />
+        <Setter Property="Height" Value="20" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/CameraMO.png"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!-- Zoom Mode Switch Button -->
+    <Style x:Key="ZoomModeButton" TargetType="{x:Type Button}">
+        <Setter Property="Focusable" Value="False" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ZoomMode3D,ElementName=WinMain}" Value="1">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <StackPanel>
+                                <Image Style="{StaticResource CameraImage}" />
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ZoomMode3D,ElementName=WinMain}" Value="2">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <StackPanel>
+                                <Image Style="{StaticResource ZoomImage}" />
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    
+
+    <!-- Normal Label Image -->
+    <Style x:Key="NormalLblImage" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/LabelNormal.png"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="24" />
+        <Setter Property="Height" Value="24" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/LabelNormalMO.png"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Overlay Label Image -->
+    <Style x:Key="OverlayLblImage" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/LabelOverlay.png"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="25" />
+        <Setter Property="Height" Value="25" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/LabelOverlayMO.png"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- None Label Image -->
+    <Style x:Key="NoneLblImage" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/LabelNone.png"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="25" />
+        <Setter Property="Height" Value="25" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/LabelNoneMO.png"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Label Type Switch Button -->
+    <Style x:Key="LabelTypeButton" TargetType="{x:Type Button}">
+        <Setter Property="Focusable" Value="False" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Labels3DMode,ElementName=WinMain}" Value="0">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <StackPanel>
+                                <Image Style="{StaticResource NormalLblImage}" />
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Labels3DMode,ElementName=WinMain}" Value="1">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <StackPanel>
+                                <Image Style="{StaticResource OverlayLblImage}" />
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Labels3DMode,ElementName=WinMain}" Value="2">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <StackPanel>
+                                <Image Style="{StaticResource NoneLblImage}" />
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+
+
+    <!--Mesh Model Image -->
+    <Style x:Key="MeshImage" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/MeshModel.png"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="24" />
+        <Setter Property="Height" Value="24" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/MeshModelMO.png"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--Wire Model Image -->
+    <Style x:Key="WireImage" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/WireFrame.png"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="25" />
+        <Setter Property="Height" Value="25" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/WireFrameMO.png"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--Point Model Image -->
+    <Style x:Key="PointImage" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/PointModel.png"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="25" />
+        <Setter Property="Height" Value="25" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="/AKP Math Graph Plotter;component/Images/PointModelMO.png"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Model Type Switch Button -->
+    <Style x:Key="ModelTypeButton" TargetType="{x:Type Button}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ActivePlaneMode,ElementName=WinMain}" Value="0">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <StackPanel>
+                                <Image Style="{StaticResource MeshImage}" />
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ActivePlaneMode,ElementName=WinMain}" Value="1">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <StackPanel>
+                                <Image Style="{StaticResource WireImage}" />
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ActivePlaneMode,ElementName=WinMain}" Value="2">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <StackPanel>
+                                <Image Style="{StaticResource PointImage}" />
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+        </Style.Triggers>
+        <Setter Property="Focusable" Value="False" />
+    </Style>
+
+    
+    
+</ResourceDictionary>

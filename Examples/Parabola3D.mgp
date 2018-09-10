@@ -1,0 +1,10 @@
+<AKPMGP>
+<rv>10.5</rv>
+<set>
+drawmode=3D
+acc3d=5
+coloringmode=bycor
+</set>
+<eq>
+z=(((x^2)+(y^2))/5)-5;3;[-inf,+inf];{};sc:Black;2;1;1
+</eq>

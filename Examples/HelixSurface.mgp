@@ -1,0 +1,9 @@
+<AKPMGP>
+<rv>10.7</rv>
+<set>
+drawmode=3D
+acc3d=5
+</set>
+<eq>
+x=(1-0.1*cos(v))*cos(u),y=0.1*(sin(v)+1.4*u),z=(1-0.1*cos(v))*sin(u);9;[-18.84,18.84][0,2pi];{};sc:#FF800080;2;1;1
+</eq>

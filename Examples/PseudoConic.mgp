@@ -1,0 +1,11 @@
+<AKPMGP>
+<rv>10.7</rv>
+<set>
+drawmode=3D
+acc3d=10
+cordetail=0
+</set>
+<eq>
+x=5*u*cos(v),y=4*(u*Sin(v)*Sin((u*Cos(v)+1)*2*pi*1/2)+u*Cos((u*Cos(v)+1)*2*pi*1/2)),z=4*(u*Sin(v)*Cos((u*Cos(v)+1)*2*pi*1/2)-u*Sin((u*Cos(v)+1)*2*pi*1/2)) ;9;[-1,0][0,6.3];{};sc:#FF008000;2;1;1
+x=5*u*cos(v),y=4*(u*Sin(v)*Sin((u*Cos(v)+1)*2*pi*1/2)+u*Cos((u*Cos(v)+1)*2*pi*1/2)),z=4*(u*Sin(v)*Cos((u*Cos(v)+1)*2*pi*1/2)-u*Sin((u*Cos(v)+1)*2*pi*1/2)) ;9;[0,1][0,6.3];{};sc:#FF80FF00;2;1;1
+</eq>

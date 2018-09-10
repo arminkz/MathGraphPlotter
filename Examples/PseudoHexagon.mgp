@@ -1,0 +1,10 @@
+<AKPMGP>
+<rv>10.7</rv>
+<set>
+drawmode=3D
+acc3d=10
+cordetail=0
+</set>
+<eq>
+x=3.4*(Cos(u)*Cos(v)*(Abs(Cos(u))^300+Abs(Sin(u))^300)^(-1/300)*(Abs(Cos(3*v/2))^400+Abs(Sin(3*v/2))^400)^(-1/1000)),y=1.486964*(1.5*(Cos(u)*Sin(v)*(Abs(Cos(u))^300+Abs(Sin(u))^300)^(-1/300)*(Abs(Cos(3*v/2))^400+Abs(Sin(3*v/2))^400)^(-1/1000))*Sin((1.7*(Cos(u)*Cos(v)*(Abs(Cos(u))^300+Abs(Sin(u))^300)^(-1/300)*(Abs(Cos(3*v/2))^400+Abs(Sin(3*v/2))^400)^(-1/1000))+1.7)*2*pi*0.3/3.4)+0.7*(Sin(u)*(Abs(Cos(u))^300+Abs(Sin(u))^300)^(-1/300))*Cos((1.7*(Cos(u)*Cos(v)*(Abs(Cos(u))^300+Abs(Sin(u))^300)^(-1/300)*(Abs(Cos(3*v/2))^400+Abs(Sin(3*v/2))^400)^(-1/1000))+1.7)*2*pi*0.3/3.4)),z=1.486964*(1.5*(Cos(u)*Sin(v)*(Abs(Cos(u))^300+Abs(Sin(u))^300)^(-1/300)*(Abs(Cos(3*v/2))^400+Abs(Sin(3*v/2))^400)^(-1/1000))*Cos((1.7*(Cos(u)*Cos(v)*(Abs(Cos(u))^300+Abs(Sin(u))^300)^(-1/300)*(Abs(Cos(3*v/2))^400+Abs(Sin(6*v/4))^400)^(-1/1000))+1.7)*2*pi*0.3/3.4)-0.7*(Sin(u)*(Abs(Cos(u))^300+Abs(Sin(u))^300)^(-1/300)) *Sin((1.7*(Cos(u)*Cos(v)*(Abs(Cos(u))^300+Abs(Sin(u))^300)^(-1/300)*(Abs(Cos(3*v/2))^400+Abs(Sin(3*v/2))^400)^(-1/1000))+1.7)*2*pi*0.3/3.4));9;[-1.58,1.58][0,6.3];{};sc:#FF0000FF;2;1;1
+</eq>

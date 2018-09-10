@@ -1,0 +1,17 @@
+<AKPMGP>
+<rv>10.7</rv>
+<set>
+drawmode=2D
+acc=50
+</set>
+<eq>
+x=u*Cos(pi*a/2)+Sin(pi*a/2)*Cos(pi*(u-0.5)),y=u*Sin(pi*a)+0.5*Sin(pi*a/2)*Sin(2*pi*(u-0.5));9;[-1,1];{};sc:#FF000000;2;1;1
+</eq>
+<var>
+a=0.66;[0,1];0.01;0;0;0
+</var>
+<point>
+P1(-Cos(pi*a/2),-Sin(pi*a),0);sc:#FF0000FF;1;0
+P2(Cos(pi*a/2),Sin(pi*a),0);sc:#FFFF0000;1;0
+P3(0,0,0);sc:#FF00FF00;1;0
+</point>

@@ -1,0 +1,10 @@
+<AKPMGP>
+<rv>10.5</rv>
+<set>
+drawmode=2D
+acc=50
+</set>
+<eq>
+y=Asin(x);1;[-1,1];{};sc:#FFFF0000;2;1;1
+y=Acos(x);1;[-1,1];{};sc:#FF0000FF;2;1;1
+</eq>

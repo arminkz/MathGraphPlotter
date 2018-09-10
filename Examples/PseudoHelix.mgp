@@ -1,0 +1,10 @@
+<AKPMGP>
+<rv>10.7</rv>
+<set>
+drawmode=3D
+acc3d=10
+cordetail=0
+</set>
+<eq>
+x=3*((1-0.1*Cos(v))*Cos(u)*Cos(((1-0.1*Cos(v))*Sin(u)+1.1)*2*pi*0.2/2.2)-0.1*(Sin(v)+u/1.7 -10)*Sin(((1-0.1*Cos(v))*Sin(u)+1.1)*2*pi*0.2/2.2)),y=3*((1-0.1*Cos(v))*Cos(u)*Sin(((1-0.1*Cos(v))*Sin(u)+1.1)*2*pi*0.2/2.2)+0.1*(Sin(v)+u/1.7-10)*Cos(((1-0.1*Cos(v))*Sin(u)+1.1)*2*pi*0.2/2.2)),z=2*(1-0.1*Cos(v))*Sin(u);9;[0,12.56][0,6.3];{};sc:#FFFFFF00;2;1;1
+</eq>

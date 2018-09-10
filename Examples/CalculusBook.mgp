@@ -1,0 +1,13 @@
+<AKPMGP>
+<rv>10.5</rv>
+<set>
+drawmode=3D
+cordetail=0
+acc3d=5
+</set>
+<shape>
+(6);();();5;7;0.5;;;;3;1;1;1;40;20;res:CalculusF.jpg;1
+(6);();();5;7;0.5;;;;3;2;1;1;40;20;res:CalculusB.png;1
+(6);();();5;7;0.5;;;;3;16;1;1;40;20;res:CalculusS.png;1
+(6);();();5;7;0.5;;;;3;44;1;1;40;20;sc:#CCC;1
+</shape>

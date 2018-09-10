@@ -1,0 +1,12 @@
+<AKPMGP>
+<rv>10.6</rv>
+<set>
+drawmode=2D
+acc=50
+</set>
+<eq>
+t=a*Log(r);5;[-inf,+inf];{};sc:#FF800080;2;1;1
+</eq>
+<var>
+a=7.2;[0,10];0.1;0;0;0
+</var>

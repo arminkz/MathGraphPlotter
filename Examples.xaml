@@ -1,0 +1,156 @@
+﻿<Window x:Class="Examples"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:AKP_Math_Graph_Plotter"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
+    Title="Examples" Height="400" Width="600" Loaded="Window_Loaded" Closing="Window_Closing" >
+
+
+    <Grid FlowDirection="RightToLeft">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="4*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <ListBox Name="ExampleList" Margin="10" FontFamily="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Koodak"
+                 DisplayMemberPath="Description">
+
+            <ListBox.GroupStyle>
+                <!--<x:Static Member="GroupStyle.Default"/>-->
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Gray" BorderThickness="0,0,0,1" Margin="0,6,0,3" >
+                                <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" Foreground="Blue" FontSize="16" Margin="5,0,0,0" />
+                            </Border>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListBox.GroupStyle>
+
+
+            <local:Example Description="مدل زمین و ماه" Group="فیزیک و نجوم" Key="EarthAndMoon" BackColor="#080B1E" ForeColor="White" />
+            <local:Example Description="حرکت دایروی" Group="فیزیک و نجوم" Key="CircularMovment"/>
+            <local:Example Description="حرکت روی مسیر پیچیده" Group="فیزیک و نجوم" Key="SofisticatedMovment"/>
+            <local:Example Description="مدل حرکت موج" Group="فیزیک و نجوم" Key="Wave" />
+            <local:Example Description="حرکت روی موج"  Group="فیزیک و نجوم" Key="MoveOnSine" />
+
+            <local:Example Description="مدل الکترون پروتون" Group="شیمی" Key="Electron"/>
+            <local:Example Description="حرکت ارتعاشی مولکولی" Group="شیمی" Key="MoulcularVibration"/>
+
+            <local:Example Description="نوار موبیوس" Group="توپولوژی" Key="Mobius" />
+            <local:Example Description="سطح کلاین" Group="توپولوژی" Key="Klein" />
+            <local:Example Description="حالات همریختی گوناگون"  Group="توپولوژی" Key="Topology" />
+            <local:Example Description="شبه کره"  Group="توپولوژی" Key="PseudoSphere" />
+            <local:Example Description="شبه فنر"  Group="توپولوژی" Key="PseudoHelix" />
+            <local:Example Description="شبه مخروط"  Group="توپولوژی" Key="PseudoConic" />
+            <local:Example Description="شبه 6 ضلعی"  Group="توپولوژی" Key="PseudoHexagon" />
+            <local:Example Description="شبه حلقه"  Group="توپولوژی" Key="PseudoTorus" />
+            
+            <local:Example Description="حلقه 4 بعدی"  Group="4 بعدی" Key="Torus4D" />
+            <local:Example Description="کره 4 بعدی"  Group="4 بعدی" Key="Sphere4D" />
+
+            <local:Example Description="پروانه" Key="Butterfly" Group="نمودار های قطبی" />
+            <local:Example Description="گل با تعداد گلبرگ دلخواه" Group="نمودار های قطبی" Key="Flower" BackColor="#FFFFF275" />
+            <local:Example Description="فضاهای دنبلی" Key="Lemniscate3D" Group="نمودار های قطبی" ForeColor="#FFA2FF00" />
+            <local:Example Description="حلزون" Key="Snail3D" Group="نمودار های قطبی" BackColor="LightGray" />
+
+            <local:Example Description="دایره ی مثلثاتی" Group="مثلثات" Key="TrigonometricCircle" BackColor="White" />
+            <local:Example Description="سینوس کسینوس" Group="مثلثات" Key="TRIG1" />
+            <local:Example Description="وارون سینوس کسینوس" Group="مثلثات" Key="InversTRIG1" />
+            <local:Example Description="تانژانت" Group="مثلثات" Key="TRIG2" />
+            <local:Example Description="وارون تانژانت" Group="مثلثات" Key="InversTRIG2" />
+
+            <local:Example Description="تابع گاوسی" Group="توابع نمایی" Key="Gaws2D"/>
+            <local:Example Description="تابع گاوسی 3 بعدی" Group="توابع نمایی" Key="Gaws3D" ForeColor="YellowGreen" BackColor="#013b01" />
+
+            <local:Example Description="تابع درجه دوم" Group="درجه دوم و سهمی" Key="Degree2" />
+            <local:Example Description="سهمی 3 بعدی" Group="درجه دوم و سهمی" Key="Parabola3D"/>
+
+            <local:Example Description="تابع درجه سوم" Group="درجه سوم" Key="Degree3" />
+            <local:Example Description="سهمی شبه مکعبی" Group="درجه سوم" Key="SemicubicalParabola" />
+
+            <local:Example Description="مارپیچ ارشمیدس" Group="مارپیچ" Key="PolarSpiral" BackColor="SkyBlue" />
+            <local:Example Description="مارپیچ لگاریتمی" Group="مارپیچ" Key="LogarithmicSpiral" BackColor="SkyBlue" />
+            <local:Example Description="مارپیچ فرمات" Group="مارپیچ" Key="FermatSpiral" BackColor="Pink" />
+            <local:Example Description="مارپیچ مخروطی" Group="مارپیچ" Key="ConicSpiral" BackColor="Pink" />
+            <local:Example Description="مارپیچ هذلولی" Group="مارپیچ" Key="HyperbolicSpiral"/>
+            <local:Example Description="مارپیچ بسته" Group="مارپیچ" Key="_" BackColor="SkyBlue" />
+
+            <local:Example Description="مکعب 1" Group="هندسه" Key="Cube1" BackColor="Yellow" />
+            <local:Example Description="مکعب 2" Group="هندسه" Key="Cube2" BackColor="Yellow" />
+            <local:Example Description="هگزادرون" Group="هندسه" Key="Hexaedron" />
+
+            <local:Example Description="مقاطع مخروطی" Group="مقاطع مخروطی" Key="ConicSections" />
+            <local:Example Description="سطح مخروطی" Group="مقاطع مخروطی" Key="ConicCone" ForeColor="DarkGreen" />
+            
+            <local:Example Description="ستاره دریایی" Group="طراحی" Key="Starfish" />
+            <local:Example Description="مکعب رنگ" Group="طراحی" Key="ColorCube" BackColor="#CCC" />
+            <local:Example Description="فنر (خط)" Group="طراحی" Key="HelixLine" />
+            <local:Example Description="فنر (سطح)" Group="طراحی" Key="HelixSurface" />
+            <local:Example Description="فرفره" Group="طراحی" Key="Toupie" />
+            <local:Example Description="پاپیون" Group="طراحی" Key="Bowtie" />
+            <local:Example Description="مدل کتاب حسابان" Group="طراحی" Key="CalculusBook"/>
+            <local:Example Description="شیپور" Group="طراحی" Key="Trumpet" />
+            <local:Example Description="شیپور 2" Group="طراحی" Key="Trumpet2" />
+            <!--<local:Example Description="قلب" Group="طراحی" Key="Heart" />-->
+
+            <local:Example Description="حل معادله به روش هندسی" Group="دیفرانسیل" Key="EqRoots" />
+            <local:Example Description="دنباله واگرای غیریکنوا" Group="دیفرانسیل" Key="NonUnivocalSequence" />
+            
+            <local:Example Description="سطح سینوسی پیچیده" Group="سایر" Key="ComplexSine3D" ForeColor="SkyBlue"/>
+
+
+
+
+
+
+
+
+
+
+
+        </ListBox>
+
+        <Border Grid.Column="1" Margin="10" BorderBrush="#CCC" BorderThickness="1" CornerRadius="2">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE6E6E6" Offset="1"/>
+                    <GradientStop Color="White"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.Background>
+                    <SolidColorBrush Color="{Binding SelectedItem.BackColor,ElementName=ExampleList}"/>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock FontFamily="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Koodak" FontSize="26" Margin="10,0,0,0"
+                               Text="{Binding SelectedItem.Description,ElementName=ExampleList}" Background="Transparent">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{Binding SelectedItem.ForeColor,ElementName=ExampleList}"/>
+                    </TextBlock.Foreground>
+                </TextBlock>
+                <Image Grid.Row="1" Source="{Binding SelectedItem.ImageSource,ElementName=ExampleList}" Grid.RowSpan="2"
+                           Stretch="Uniform" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15" />
+                <Button Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10" Padding="5"
+                        Click="LoadExample">
+                    <TextBlock FontFamily="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Koodak" FontSize="18"
+                               Text="بارگذاری" Background="Transparent">
+                    </TextBlock>
+                </Button>
+            </Grid>
+        </Border>
+
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Margin="10,0,0,5" FontFamily="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Koodak"
+                   Text="بارگذاری برخی نمودار ها ممکن است کمی طول بکشد. لطفا صبور باشید" />
+        
+    </Grid>
+</Window>

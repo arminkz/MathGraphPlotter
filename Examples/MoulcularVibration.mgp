@@ -1,0 +1,17 @@
+<AKPMGP>
+<rv>10.5</rv>
+<set>
+drawmode=3D
+acc3d=5
+</set>
+<var>
+t=0;[0,2pi];0.2;0;1;1
+</var>
+<point>
+P1((Sin(t)/2)+1,0,0);sc:Black;0;0
+P2(-(Sin(t)/2)-1,0,0);sc:Black;0;0
+</point>
+<shape>
+(7);(P1);();;;;0.5;;;3;63;1;1;40;20;sc:Red;1
+(7);(P2);();;;;0.5;;;3;63;1;1;40;20;sc:Blue;1
+</shape>

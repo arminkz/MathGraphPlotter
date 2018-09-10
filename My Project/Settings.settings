@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="UpdateURI2" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://dl.dropbox.com/s/txjsw9ze87g6a19/AKP.Graph.VERSION.html</Value>
+    </Setting>
+    <Setting Name="TimesLaunched" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CheckForUpdateLast" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CheckForUpdateDays" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="UpdateURI" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://akpapps.gigfa.com/akp/AKP.Graph.VERSION.html</Value>
+    </Setting>
+    <Setting Name="UpdateEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SubmitURI" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://akpapps.gigfa.com/akp/AKP.Graph.Logger.php</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

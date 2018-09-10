@@ -1,0 +1,14 @@
+<AKPMGP>
+<rv>10.5</rv>
+<set>
+drawmode=3D
+acc3d=5
+</set>
+<eq>
+y=x;1;[-inf,+inf];{};sc:#FFFF0000;2;1;1
+y=-x;1;[-inf,+inf];{};sc:#FFFF0000;2;1;1
+y=z;1;[-inf,+inf];{};sc:#FF0000FF;2;1;1
+y=-z;1;[-inf,+inf];{};sc:#FF0000FF;2;1;1
+x=z;2;[-inf,+inf];{};sc:#FF00FF00;2;1;1
+x=-z;2;[-inf,+inf];{};sc:#FF00FF00;2;1;1
+</eq>

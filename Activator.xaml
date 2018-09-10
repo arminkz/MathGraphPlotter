@@ -1,0 +1,56 @@
+﻿<Window x:Class="Activator"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Activator" Height="300" Width="469.925" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closed="Window_Closed" >
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <TextBlock Text="لطفا نام کاربری و رمز عبور خود را وارد کنید" 
+                   FontFamily="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Koodak" FontSize="20"
+                   HorizontalAlignment="Right" Margin="10,10,10,0" />
+
+        <Image Source="/AKP Math Graph Plotter;component/Images/Lock.png" Grid.Row="1"
+               Width="100" HorizontalAlignment="Right" Margin="0,0,20,0"/>
+        
+        <Grid Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Username :" Grid.Row="0" Margin="5" FontSize="20" />
+            <TextBox Name="UserText" Text="user" MinWidth="150" Grid.Row="0" Grid.Column="1" Margin="5" FontSize="20"/>
+            <TextBlock Text="Password :" Grid.Row="1" Margin="5" FontSize="20" />
+            <PasswordBox Name="PassText" Password="user" MinWidth="150" Grid.Row="1" Grid.Column="1" Margin="5" FontSize="20"/>
+        </Grid>
+
+        <Grid Grid.Row="2" FlowDirection="RightToLeft" >
+            <TextBlock Name="StatusText" Text="در حال برقراری ارتباط با سرور ..." Margin="5" Visibility="Collapsed"
+                       FontFamily="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Koodak" FontSize="14" />
+        </Grid>
+
+        <WrapPanel Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="3">
+            <Button Content="انصراف" Margin="10,10,0,10" MinWidth="100" Click="CloseWindow"
+                    FontFamily="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Koodak" FontSize="20" />
+            <Button Content="تائید" Margin="10,10,0,10" MinWidth="100" Click="ActivateProgram"
+                    FontFamily="/AKP Math Graph Plotter;component/Fonts/Farsi/#B Koodak" FontSize="20" />
+        </WrapPanel>
+
+    </Grid>
+    
+        
+</Window>

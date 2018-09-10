@@ -1,0 +1,12 @@
+<AKPMGP>
+<rv>10.5</rv>
+<set>
+drawmode=2D
+acc=50
+</set>
+<eq>
+r=Sin(a*t);4;[-inf,+inf];{};sc:#FFFF8000;2;1;1
+</eq>
+<var>
+a=4;[0,10];1;0.5;0;0
+</var>

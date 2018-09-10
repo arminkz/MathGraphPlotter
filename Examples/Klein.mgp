@@ -1,0 +1,8 @@
+<AKPMGP>
+<rv>10.7</rv>
+<set>
+drawmode=3D
+</set>
+<eq>
+x=(2 + cos(v/2)* sin(u) - sin(v/2)* sin(2 *u))* cos(v),y=sin(v/2)* sin(u) + cos(v/2) *sin(2* u),z=(2 + cos(v/2)* sin(u) - sin(v/2)* sin(2 *u))* sin(v);9;[0,6.3][0,6.3];{};sc:#FFFFFF00;2;1;1
+</eq>
